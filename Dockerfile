@@ -4,6 +4,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 COPY ./BACKEND/ /var/www/html
 COPY ./FRONTEND/ /var/www/html
+COPY composer.json composer.lock /var/www/html/
 
 WORKDIR /var/www/html
 
