@@ -6,7 +6,7 @@ COPY ./BACKEND/ /var/www/html
 
 COPY ./FRONTEND/ /var/www/html
 
-COPY ./api/composer.json /var/www/html/composer.json
+COPY ./BACKEND/api/composer.json /var/www/html/composer.json
 
 WORKDIR /var/www/html
 
