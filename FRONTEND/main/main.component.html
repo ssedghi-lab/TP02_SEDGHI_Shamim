@@ -1,0 +1,140 @@
+<!-- main.component.html -->
+<div class="container">
+    <form (ngSubmit)="onSubmit()" *ngIf="!formSubmitted">
+        <div class="form-field">
+            <label for="civilite">Civilité :</label>
+            <select id="civilite" [(ngModel)]="client.civilite" name="civilite" required #civilite="ngModel">
+                <option value="" disabled selected>Choisir...</option>
+                <option value="M.">M.</option>
+                <option value="Mme">Mme</option>
+                <option value="Mlle">Mlle</option>
+            </select>
+            <div *ngIf="civilite.invalid && civilite.touched" class="error-message">
+                <p *ngIf="civilite.errors && civilite.errors['required']">Le champ civilite est obligatoire.</p>
+            </div>
+        </div>
+        <div class="form-field">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" [(ngModel)]="client.nom" required #nom="ngModel" minlength="2" pattern="[a-zA-ZÀ-ÿ '-]+" />
+            <div *ngIf="nom.invalid && nom.touched" class="error-message">
+                <p *ngIf="nom.errors && nom.errors['required']">Le champ Nom est obligatoire.</p>
+                <p *ngIf="nom.errors && nom.errors['minlength']">
+                    Le Nom doit avoir au moins {{ nom.errors['minlength']?.requiredLength }} caractères. Vous en avez écrit {{ nom.errors['minlength']?.actualLength }}.
+                </p>
+                <p *ngIf="nom.errors && nom.errors['pattern']">Le Nom doit contenir uniquement des lettres.</p>
+            </div>
+        </div>
+
+
+
+        <div class="form-field">
+            <label for="prenom">Prenom :</label>
+            <input type="text" id="prenom" name="prenom" [(ngModel)]="client.prenom" required #prenom="ngModel" minlength="2" pattern="[a-zA-ZÀ-ÿ '-]+" />
+            <div *ngIf="prenom.invalid && prenom.touched" class="error-message">
+                <p *ngIf="prenom.errors && prenom.errors['required']">Le champ Prenom est obligatoire.</p>
+                <p *ngIf="prenom.errors && prenom.errors['minlength']">
+                    Le Prenom doit avoir au moins {{ prenom.errors['minlength']?.requiredLength }} caractères. Vous en avez écrit {{ prenom.errors['minlength']?.actualLength }}.
+                </p>
+                <p *ngIf="prenom.errors && prenom.errors['pattern']">Le Prenom doit contenir uniquement des lettres.</p>
+            </div>
+        </div>
+
+
+        <div class="form-field">
+            <label for="adresse">Adresse :</label>
+            <input type="text" id="prenom" name="prenom" [(ngModel)]="client.adresse" required #adresse="ngModel" minlength="2" />
+            <div *ngIf="adresse.invalid && adresse.touched" class="error-message">
+                <p *ngIf="adresse.errors && adresse.errors['required']">Le champ Adresse est obligatoire.</p>
+            </div>
+        </div>
+
+
+        <div class="form-field">
+            <label for="cp">Code Postal :</label>
+            <input id="cp" [(ngModel)]="client.cp" name="cp" #cp="ngModel" required pattern="^\d{4,6}$" />
+            <div *ngIf="cp.invalid && cp.touched" class="error-message">
+                <p *ngIf="cp.errors && cp.errors['required']">Le code postal est obligatoire.</p>
+                <p *ngIf="cp.errors && cp.errors['pattern']">Le code postal doit contenir entre 4 et 6 chiffres.</p>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="ville">Ville :</label>
+            <input type="text" id="ville" name="ville" [(ngModel)]="client.ville" required #ville="ngModel" minlength="2" pattern="[a-zA-ZÀ-ÿ '-]+" />
+            <div *ngIf="ville.invalid && ville.touched" class="error-message">
+                <p *ngIf="ville.errors && ville.errors['required']">Le champ ville est obligatoire.</p>
+                <p *ngIf="ville.errors && ville.errors['minlength']">
+                    La ville doit avoir au moins {{ ville.errors['minlength']?.requiredLength }} caractères. Vous en avez écrit {{ ville.errors['minlength']?.actualLength }}.
+                </p>
+                <p *ngIf="ville.errors && ville.errors['pattern']">La ville doit contenir uniquement des lettres.</p>
+            </div>
+        </div>
+        <div class="form-field">
+            <label for="pays">Pays :</label>
+            <input type="text" id="pays" name="pays" [(ngModel)]="client.pays" required #pays="ngModel" minlength="2" pattern="[a-zA-ZÀ-ÿ '-]+" />
+            <div *ngIf="pays.invalid && pays.touched" class="error-message">
+                <p *ngIf="pays.errors && pays.errors['required']">Le champ ville est obligatoire.</p>
+                <p *ngIf="pays.errors && pays.errors['minlength']">
+                    La ville doit avoir au moins {{ pays.errors['minlength']?.requiredLength }} caractères. Vous en avez écrit {{ pays.errors['minlength']?.actualLength }}.
+                </p>
+                <p *ngIf="pays.errors && pays.errors['pattern']">La ville doit contenir uniquement des lettres.</p>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="tel">Téléphone :</label>
+            <input id="tel" [(ngModel)]="client.tel" name="tel" #tel="ngModel" required pattern="^\d{10,14}$" />
+            <div *ngIf="tel.invalid && tel.touched" class="error-message">
+                <p *ngIf="tel.errors && tel.errors['required']">Le numéro de téléphone est obligatoire.</p>
+                <p *ngIf="tel.errors && tel.errors['pattern']">Le numéro de téléphone doit contenir entre 10 et 14 chiffres.</p>
+            </div>
+        </div>
+
+
+        <div class="form-field">
+            <label for="email">Email :</label>
+            <input id="email" [(ngModel)]="client.email" name="email" required type="email" #email="ngModel" />
+            <div *ngIf="email.invalid && email.touched" class="error-message">
+                <p *ngIf="email.errors && email.errors['required']">Ce champ est obligatoire.</p>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="login">Login :</label>
+            <input id="login" [(ngModel)]="client.login" name="login" required type="login" #login="ngModel" />
+            <div *ngIf="login.invalid && login.touched" class="error-message">
+                <p *ngIf="login.errors && login.errors['required']">Ce champ est obligatoire.</p>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="password">Mot de passe :</label>
+            <input id="password" [(ngModel)]="client.password" name="password" required type="password" #password="ngModel" />
+            <div *ngIf="password.invalid && password.touched" class="error-message">
+                <p *ngIf="password.errors && password.errors['required']">Ce champ est obligatoire.</p>
+            </div>
+        </div>
+
+
+
+
+        <button type="submit">Valider</button>
+    </form>
+
+    <div *ngIf="formSubmitted">
+        <h2>Récapitulatif des informations saisies :</h2>
+        <ul>
+            <li>Civilité : {{ client.civilite }}</li>
+            <li>Nom : {{ client.nom }}</li>
+            <li>Prénom : {{ client.prenom }}</li>
+            <li>Adresse : {{ client.adresse }}</li>
+            <li>Code Postal : {{ client.cp }}</li>
+            <li>Ville : {{ client.ville }}</li>
+            <li>Pays : {{ client.pays }}</li>
+            <li>Téléphone : {{ client.tel }}</li>
+            <li>Email : {{ client.email }}</li>
+            <li>Login : {{ client.login }}</li>
+            <li>Mot de passe : {{ client.password }}</li>
+        </ul>
+    </div>
+</div>
