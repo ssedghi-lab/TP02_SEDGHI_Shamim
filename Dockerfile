@@ -4,7 +4,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 COPY ./BACKEND/ /var/www/html
 
-COPY ./Frontend/ /var/www/html
+COPY ./FRONTEND/ /var/www/html
 
 WORKDIR /var/www/html
 
