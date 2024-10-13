@@ -3,15 +3,14 @@ FROM php:7.4-apache
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 COPY ./BACKEND/ /var/www/html
-
 COPY ./FRONTEND/ /var/www/html
 
 WORKDIR /var/www/html
 
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
-&& curl -sSk https://getcomposer.org/installer | php -- --disable-tls \
-&& mv composer.phar /usr/local/bin/composer \
-&& apt-get update && apt-get install -y \
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN a2enmod rewrite headers
+
+RUN apt-get update && apt-get install -y \
     curl \
     git \
     libbz2-dev \
@@ -25,14 +24,15 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
     libpq-dev \
     unzip \
     zip \
-&& rm -rf /var/lib/apt/lists/* \
-&& a2enmod rewrite headers \
-&& composer install --prefer-dist \
-&& composer dump-autoload --optimize \
-&& composer update
+ && rm -rf /var/lib/apt/lists/*
 
-# Exposer le port 80 pour permettre les connexions entrantes
+RUN curl -sS https://getcomposer.org/installer | php \
+ && mv composer.phar /usr/local/bin/composer
+
+RUN composer install --prefer-dist -v
+RUN composer dump-autoload --optimize -v
+RUN composer update -v
+
 EXPOSE 80
 
-# Définir l'entrée de l'application
 CMD ["apache2-foreground"]
